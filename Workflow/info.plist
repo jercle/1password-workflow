@@ -4,6 +4,8 @@
 <dict>
 	<key>bundleid</key>
 	<string>com.alfredapp.1password</string>
+	<key>category</key>
+	<string>Tools</string>
 	<key>connections</key>
 	<dict>
 		<key>00410CE8-EE28-4A86-A499-AFEF61C55109</key>
@@ -135,6 +137,18 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>21D35A22-C14C-4DEA-BEEB-E08EDF1E5732</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>CB1F7B3E-89AC-4929-8AD8-6605DD62910B</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 		</array>
 		<key>2BBDFBE4-FBBC-4506-9269-3CFB4017932C</key>
 		<array>
@@ -204,7 +218,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>2894C3A0-66EF-4AD5-B055-673F1270B916</string>
+				<string>57181E71-F77E-4DC2-950E-6B307EAA51AC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -322,6 +336,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>C6542F9B-7628-484C-8E6B-E87E5291D5BA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>57181E71-F77E-4DC2-950E-6B307EAA51AC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2894C3A0-66EF-4AD5-B055-673F1270B916</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -1931,6 +1958,7 @@ case "${action}" in
   'Copy Username') ./1password.js 'copy_by_label' 'username' "${itemID}";;
   'Copy Password') ./1password.js 'copy_by_label' 'password' "${itemID}";;
   'Copy OTP') ./1password.js 'copy_otp' "${itemID}";;
+  'Show OTP') ./1password.js 'show_otp' "${itemID}";;
   *) echo "Invalid action: ${action}" &gt;&amp;2; exit 1
 esac</string>
 				<key>scriptargtype</key>
@@ -1946,52 +1974,6 @@ esac</string>
 			<string>3D8ADCD5-BC66-47A5-B354-ED6C2EAFFA24</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>openandfill</string>
-						<key>outputlabel</key>
-						<string>Open and Fill</string>
-						<key>uid</key>
-						<string>DA2F345E-AEF5-4D35-988D-DECECC15D94C</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string></string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>view</string>
-						<key>outputlabel</key>
-						<string>View in 1Password</string>
-						<key>uid</key>
-						<string>EEAE4AD1-7B81-409C-821C-00A1CA6056C4</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string></string>
-				<key>hideelse</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>2894C3A0-66EF-4AD5-B055-673F1270B916</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2129,6 +2111,66 @@ fi</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:split1}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>openandfill</string>
+						<key>outputlabel</key>
+						<string>Open and Fill</string>
+						<key>uid</key>
+						<string>DA2F345E-AEF5-4D35-988D-DECECC15D94C</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:split1}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>view</string>
+						<key>outputlabel</key>
+						<string>View in 1Password</string>
+						<key>uid</key>
+						<string>EEAE4AD1-7B81-409C-821C-00A1CA6056C4</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:split1}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>show_otp</string>
+						<key>outputlabel</key>
+						<string>Show OTP</string>
+						<key>uid</key>
+						<string>CB1F7B3E-89AC-4929-8AD8-6605DD62910B</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Show OTP</string>
+				<key>hideelse</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>2894C3A0-66EF-4AD5-B055-673F1270B916</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>externaltriggerid</key>
 				<string>search_items</string>
 				<key>passinputasargument</key>
@@ -2173,6 +2215,48 @@ fi</string>
 			<string>5526B8BB-14D0-4271-94CE-0C7C2A1DC4E7</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{var:split2}</string>
+				<key>title</key>
+				<string>OTP</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>21D35A22-C14C-4DEA-BEEB-E08EDF1E5732</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>delimiter</key>
+				<string>,</string>
+				<key>discardemptyarguments</key>
+				<false/>
+				<key>outputas</key>
+				<integer>0</integer>
+				<key>trimarguments</key>
+				<true/>
+				<key>variableprefix</key>
+				<string>split</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.split</string>
+			<key>uid</key>
+			<string>57181E71-F77E-4DC2-950E-6B307EAA51AC</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -2476,12 +2560,19 @@ To report a problem, run `!1pdiagnostic`.</string>
 			<key>ypos</key>
 			<real>715</real>
 		</dict>
+		<key>21D35A22-C14C-4DEA-BEEB-E08EDF1E5732</key>
+		<dict>
+			<key>xpos</key>
+			<real>1030</real>
+			<key>ypos</key>
+			<real>1055</real>
+		</dict>
 		<key>2894C3A0-66EF-4AD5-B055-673F1270B916</key>
 		<dict>
 			<key>xpos</key>
-			<real>670</real>
+			<real>815</real>
 			<key>ypos</key>
-			<real>840</real>
+			<real>965</real>
 		</dict>
 		<key>2BBDFBE4-FBBC-4506-9269-3CFB4017932C</key>
 		<dict>
@@ -2570,6 +2661,13 @@ To report a problem, run `!1pdiagnostic`.</string>
 			<real>60</real>
 			<key>ypos</key>
 			<real>1030</real>
+		</dict>
+		<key>57181E71-F77E-4DC2-950E-6B307EAA51AC</key>
+		<dict>
+			<key>xpos</key>
+			<real>635</real>
+			<key>ypos</key>
+			<real>1065</real>
 		</dict>
 		<key>5B779377-8A0B-4819-9840-611C663A1004</key>
 		<dict>
@@ -2851,8 +2949,6 @@ To report a problem, run `!1pdiagnostic`.</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>default</key>
-				<string>Open and Fill</string>
 				<key>pairs</key>
 				<array>
 					<array>
@@ -2889,8 +2985,6 @@ To report a problem, run `!1pdiagnostic`.</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>default</key>
-				<string>View in 1Password</string>
 				<key>pairs</key>
 				<array>
 					<array>
@@ -2912,6 +3006,10 @@ To report a problem, run `!1pdiagnostic`.</string>
 					<array>
 						<string>Copy One-Time Password</string>
 						<string>Copy OTP</string>
+					</array>
+					<array>
+						<string>Show and Copy OTP</string>
+						<string>Show OTP</string>
 					</array>
 				</array>
 			</dict>
@@ -2927,8 +3025,6 @@ To report a problem, run `!1pdiagnostic`.</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>default</key>
-				<string>Copy Password</string>
 				<key>pairs</key>
 				<array>
 					<array>
@@ -2950,6 +3046,10 @@ To report a problem, run `!1pdiagnostic`.</string>
 					<array>
 						<string>Copy One-Time Password</string>
 						<string>Copy OTP</string>
+					</array>
+					<array>
+						<string>Show and Copy OTP</string>
+						<string>Show OTP</string>
 					</array>
 				</array>
 			</dict>
@@ -2965,8 +3065,6 @@ To report a problem, run `!1pdiagnostic`.</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>default</key>
-				<string>Copy Username</string>
 				<key>pairs</key>
 				<array>
 					<array>
@@ -2988,6 +3086,10 @@ To report a problem, run `!1pdiagnostic`.</string>
 					<array>
 						<string>Copy One-Time Password</string>
 						<string>Copy OTP</string>
+					</array>
+					<array>
+						<string>Show and Copy OTP</string>
+						<string>Show OTP</string>
 					</array>
 				</array>
 			</dict>
@@ -3003,8 +3105,6 @@ To report a problem, run `!1pdiagnostic`.</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>default</key>
-				<string>Copy OTP</string>
 				<key>pairs</key>
 				<array>
 					<array>
@@ -3026,6 +3126,10 @@ To report a problem, run `!1pdiagnostic`.</string>
 					<array>
 						<string>Copy One-Time Password</string>
 						<string>Copy OTP</string>
+					</array>
+					<array>
+						<string>Show and Copy OTP</string>
+						<string>Show OTP</string>
 					</array>
 				</array>
 			</dict>
