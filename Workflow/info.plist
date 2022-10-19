@@ -2226,7 +2226,8 @@ fi</string>
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>{var:split2}</string>
+				<string>{var:split5}
+{var:split2}</string>
 				<key>title</key>
 				<string>{var:split4} / {var:split3} - OTP</string>
 			</dict>
