@@ -104,14 +104,21 @@ function copyOTP(itemID) {
 // String -> ()
 function showOTP(itemID) {
   const allOTP = runOP('item', 'get', '--field', 'type=otp', itemID); // Can be array of objects, single object, or nothing
+  const fullObj = runOP('item', 'get', '--format', 'json', itemID); // Can be array of objects, single object, or nothing
   const otp = allOTP.length > 0 ? allOTP[0]['totp'] : allOTP['totp']; // If more than one, get primary
 
   // const rnd = 'random'
 
   copySensitive(otp);
-  // writeSTDOUT('TESTING STDOUT');
+  // writeSTDOUT(title.title);
 
-  return ['show_otp', otp]
+
+  const fields = fullObj.fields
+
+  const username = fields.filter((field) => field.label === 'username')[0].value
+
+
+  return ['show_otp', otp, fullObj.title, fullObj.vault.name, username ]
 }
 
 // String -> ()

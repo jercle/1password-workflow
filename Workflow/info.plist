@@ -1958,7 +1958,7 @@ case "${action}" in
   'Copy Username') ./1password.js 'copy_by_label' 'username' "${itemID}";;
   'Copy Password') ./1password.js 'copy_by_label' 'password' "${itemID}";;
   'Copy OTP') ./1password.js 'copy_otp' "${itemID}";;
-  'Show OTP') ./1password.js 'show_otp' "${itemID}";;
+  'Show and Copy OTP') ./1password.js 'show_otp' "${itemID}";;
   *) echo "Invalid action: ${action}" &gt;&amp;2; exit 1
 esac</string>
 				<key>scriptargtype</key>
@@ -2228,7 +2228,7 @@ fi</string>
 				<key>text</key>
 				<string>{var:split2}</string>
 				<key>title</key>
-				<string>OTP</string>
+				<string>{var:split4} / {var:split3} - OTP</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -3049,7 +3049,7 @@ To report a problem, run `!1pdiagnostic`.</string>
 					</array>
 					<array>
 						<string>Show and Copy OTP</string>
-						<string>Show OTP</string>
+						<string>Show and Copy OTP</string>
 					</array>
 				</array>
 			</dict>
